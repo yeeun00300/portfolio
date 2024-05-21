@@ -100,4 +100,25 @@ body {
 }
 
 /*함수 실행으로 만들어지는 class들*/
-/*press*/
+/* .check, .on*/
+
+.check {
+  color: white;
+}
+
+#keydown.check {
+  background-color: rgb(0, 255, 170);
+}
+#keypress.check {
+  background-color: rgb(138, 248, 211);
+}
+#keyup.check {
+  background-color: rgb(215, 255, 242);
+}
+
+.on {
+  color: white;
+  background-color: #f73a7f;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
+  transform: translateY(1px);
+}

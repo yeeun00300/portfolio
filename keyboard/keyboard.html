@@ -126,6 +126,9 @@
     </div>
   </body>
   <script>
+    //keydown 키보드 눌렸을때 (무조건발생)
+    //keypress 키보드 눌러서 화면에 텍스트 입력됐을때(입력안되면 발생안함);
+    // keydown -> keypress -> keyup
     const myInput = document.getElementById("my-input");
     const key = document.getElementById("key");
     const code = document.getElementById("code");
@@ -133,8 +136,67 @@
     const keypress = document.getElementById("keypress");
     const keyup = document.getElementById("keyup");
 
+    //**keypress 이벤트
     function presskeyEvent() {
       keypress.classList.add("check");
+
+      setTimeout(function () {
+        keypress.classList.remove("check");
+      }, 300);
     }
+
+    //**keydown 이벤트
+    function downkeyEvent(e) {
+      // function 키 막아주는 이벤트
+      if (
+        e.code == "F1" ||
+        e.code == "F3" ||
+        e.code == "F5" ||
+        e.code == "F6" ||
+        e.code == "F7" ||
+        e.code == "F10" ||
+        e.code == "F11" ||
+        e.code == "F12" ||
+        e.code == "Tab" ||
+        e.code == "MetaLeft" ||
+        e.code == "MetaRight" ||
+        e.code == "AltRight"
+      ) {
+        e.preventDefault();
+      }
+      // 눌린 키에 대한 요소 가져오기
+      const el = document.querySelector(`#${e.code}`);
+      console.log(`key : ${e.key}, code : ${e.code}`);
+      // div #keydown 에 .check(글자색) 추가
+      keydown.classList.add("check");
+      // 키 입력된 div에 색상 추가하기( .on 추가)
+      el.classList.add("on");
+      //눌린 키의 "key" 와 "code" 프로퍼티 값을 화면에 표시
+      key.innerHTML = `key : ${e.key}`;
+      code.innerHTML = `code : ${e.code}`;
+      //추가된 check 클래스를 0.3초 이후 제거
+      setTimeout(function () {
+        keydown.classList.remove("check");
+      }, 300);
+    }
+
+    //**keyup 이벤트
+    function upkeyEvent(e) {
+      //손가락을 뗐을때 키 요소를 가져온다.
+      const el = document.querySelector(`#${e.code}`);
+      //#keyup 에 .check 추가
+      keyup.classList.add("check");
+      //손가락을 뗀 키를 화면상에서 다시 원상복구 (.on 제거)
+      el.classList.remove("on");
+      //check 클래스를 0.3초 이후에 제거한다.
+      setTimeout(function () {
+        keyup.classList.remove("check");
+      }, 300);
+    }
+
+    //input에 입력했을때 event 추가
+    myInput.addEventListener("keypress", presskeyEvent);
+    myInput.addEventListener("keydown", downkeyEvent);
+    myInput.addEventListener("keyup", upkeyEvent);
   </script>
 </html>
