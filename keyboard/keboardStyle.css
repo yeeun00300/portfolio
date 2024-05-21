@@ -57,7 +57,7 @@ body {
 #ArrowLeft,
 #ArrowDown,
 #ArrowRight {
-  height: 20px;
+  height: 20.5px;
 }
 
 .function-keys {
@@ -73,7 +73,7 @@ body {
 
 #Backspace,
 #Tab {
-  width: 86px;
+  width: 79px;
 }
 
 #CapsLock,

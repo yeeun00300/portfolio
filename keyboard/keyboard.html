@@ -160,6 +160,7 @@
         e.code == "Tab" ||
         e.code == "MetaLeft" ||
         e.code == "MetaRight" ||
+        e.code == "AltLeft" ||
         e.code == "AltRight"
       ) {
         e.preventDefault();
@@ -192,6 +193,15 @@
       setTimeout(function () {
         keyup.classList.remove("check");
       }, 300);
+
+      //AltRight는 keyup에만 발생하기 때문에 여기에 적어줌
+      if (e.code == "AltRight") {
+        // on 클래스 추가했다가 0.3초 뒤에 제거
+        el.classList.add("on");
+        setTimeout(function () {
+          el.classList.remove("on");
+        }, 300);
+      }
     }
 
     //input에 입력했을때 event 추가
