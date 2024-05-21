@@ -25,10 +25,15 @@ body {
   margin: 0%;
   gap: 10px;
 }
+h1 {
+  margin: 0;
+  color: #f73a7f;
+}
 
 #my-input {
   width: 333px;
   height: 30px;
+  font-family: "Ownglyph_meetme-Rg";
   font-size: 18px;
 }
 
