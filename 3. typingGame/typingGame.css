@@ -1,0 +1,53 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #ffcccc;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#container {
+  width: 90%;
+  height: 80%;
+  position: relative;
+}
+#input {
+  width: 180px;
+  height: 45px;
+  font-size: 16px;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+}
+.word {
+  color: #ffffff;
+  font-size: 40px;
+  font-weight: 600;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 15px;
+}
+.score {
+  color: white;
+  font-size: 30px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 15px;
+  padding-right: 60px;
+}
+.chance {
+  position: absolute;
+  top: 50px;
+  right: 0;
+  padding: 15px;
+}

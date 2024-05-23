@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="typingGame.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="container">
+      <input id="input" type="text" placeholder="단어를 입력하세요." />
+    </div>
+    <div class="score">점수 : 0</div>
+    <div class="chance">
+      <img
+        class="heartImg life"
+        src="../resources/img/typingGame/하트.png"
+        width="25"
+        height="25"
+      />
+      <img
+        class="heartImg life"
+        src="../resources/img/typingGame/하트.png"
+        width="25"
+        height="25"
+      />
+      <img
+        class="heartImg life"
+        src="../resources/img/typingGame/하트.png"
+        width="25"
+        height="25"
+      />
+      <img
+        class="heartImg life"
+        src="../resources/img/typingGame/하트.png"
+        width="25"
+        height="25"
+      />
+      <img
+        class="heartImg life"
+        src="../resources/img/typingGame/하트.png"
+        width="25"
+        height="25"
+      />
+    </div>
+  </body>
+  <script>
+    // 1) 내려올 단어를 배열로 선언한다.
+    const words = [
+      "DW",
+      "JavaScript",
+      "DOM",
+      "BOM",
+      "document",
+      "window",
+      "Event",
+    ];
+
+    // 2) 화면과 스크립트를 연결할 요소들을 가져온다.
+    const input = document.querySelector("#input"); // 단어입력창
+    const scorePanel = document.querySelector(".score"); // 점수창
+    const container = document.querySelector("#container"); // 단어가 화면에 표시될 부분
+
+    // 3) 단어들이 나올 container 의 범위를 파악한다.
+    const maxPositionX = container.offsetWidth - 90; //container의 가로범위
+    const maxPositionY = container.offsetHeight - 400; //container의 세로범위;
+
+    // 4) 단어를 생성한 후 화면에 출력한다.
+    function init() {
+      words.forEach(function (el) {
+        const span = document.createElement("span");
+        span.innerHTML = el;
+        span.classList.add("word");
+        span.setAttribute("id", el);
+        span.style.top = `${Math.floor(Math.random() * maxPositionY)}px`;
+        span.style.left = `${Math.floor(Math.random() * maxPositionX)}px`;
+        container.append(span);
+      });
+    }
+
+    // 5) 사용자가 입력한 텍스트와 동일한 id를 가진 span 태그를 제거한 후 점수를 측정한다.
+    let count = 0;
+    let score = 0;
+    input.addEventListener("change", function () {
+      const word = document.querySelector(`span[id=${input.value}]`);
+      if (word != null) {
+        word.remove();
+        score = score + 10;
+        scorePanel.innerHTML = `점수 : ${score}`;
+        count++;
+        if (count == words.length) {
+          alert("🎉🎊Clear!🎊🎉");
+          if (confirm("재도전하시겠습니까?")) {
+            window.location.reload();
+          }
+        }
+      }
+      input.value = "";
+    });
+
+    // 6) 화면에 나오는 단어들을 움직이게 한다.
+    let failCnt = 0;
+    function wordRain() {
+      const words = document.querySelectorAll(".word");
+      console.log(container.getBoundingClientRect().bottom - 45);
+      setInterval(function () {
+        words.forEach(function (el) {
+          const rectSize = el.getBoundingClientRect();
+          el.style.top = `${rectSize.top - 75}px`;
+          if (
+            el.getBoundingClientRect().bottom >
+            container.getBoundingClientRect().bottom -
+              parseInt(getComputedStyle(input).height.split("px")[0])
+          ) {
+            el.remove();
+            failCnt++;
+            const lives = document.querySelectorAll(".life");
+            console.log(lives);
+            lives[failCnt - 1].src = "../resources/img/typingGame/깨진하트.png";
+            if (failCnt == 5) {
+              setTimeout(function () {
+                alert("실패하셨습니다!");
+                if (confirm("재도전하시겠습니까?")) {
+                  window.location.reload();
+                }
+              }, 500);
+            }
+          }
+        });
+      }, 1000);
+    }
+    // 7) 함수 실행
+    init();
+    wordRain();
+  </script>
+</html>
