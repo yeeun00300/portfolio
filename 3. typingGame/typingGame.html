@@ -106,7 +106,9 @@
       setInterval(function () {
         words.forEach(function (el) {
           const rectSize = el.getBoundingClientRect();
-          el.style.top = `${rectSize.top - 75}px`;
+          el.style.top = `${
+            rectSize.top + container.getBoundingClientRect().top / 100
+          }px`;
           if (
             el.getBoundingClientRect().bottom >
             container.getBoundingClientRect().bottom -
